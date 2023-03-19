@@ -1,7 +1,14 @@
+import { Suspense, useEffect } from 'react';
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
+
+import { Canvas, extend, useLoader } from '@react-three/fiber'
+import { OrbitControls, Environment, Effects, Loader, useTexture,Stars, ScrollControls } from '@react-three/drei'
+import Sphere  from '../components/ui/World'
+import Lottie from 'react-lottie-player'
+import lottieJson from '../public/signal.json';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,13 +21,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
+      <main >
         <div className={styles.description}>
-          <p>
+          {/* <p>
             Get started by editing&nbsp;
             <code className={styles.code}>pages/index.tsx</code>
-          </p>
-          <div>
+          </p> */}
+          {/* <div>
             <a
               href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
               target="_blank"
@@ -36,10 +43,10 @@ export default function Home() {
                 priority
               />
             </a>
-          </div>
+          </div> */}
         </div>
 
-        <div className={styles.center}>
+        {/* <div className={styles.center}>
           <Image
             className={styles.logo}
             src="/next.svg"
@@ -57,67 +64,62 @@ export default function Home() {
               priority
             />
           </div>
-        </div>
+        </div> */}
 
         <div className={styles.grid}>
+
+          <div className={styles.card1}>
+            <div className={inter.className}>
+            <h2>
+              RCG · SOLUCIONES
+            </h2>
+            <p>
+              Telemetría y comunicación integral
+            </p>
+            </div>
+          </div>
+
           <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
             className={styles.card}
+            href="mailto:gerencia@rgcsoluciones.com"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
-            </h2>
+            <h4 className={inter.className}>
+              Contáctanos <span>-&gt;</span>
+            </h4>
             <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
+              ¡Crece tu empresa y cuéntanos tu proyecto!
             </p>
           </a>
 
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
         </div>
       </main>
+
+      <div className={styles.sat}>
+      <span>🛰</span>
+
+      {/* <Lottie
+      loop
+      animationData={lottieJson}
+      className={styles.signals}
+      play
+      style={{ width: 150, height: 150, zIndex:'2', position:'absolute', marginTop:'1.9rem', marginRight:'1.6rem' }}
+      /> */}
+
+      <Canvas className={styles.worldBg} camera={{ zoom: 400, position:[40,10,50]}}>
+        <spotLight intensity={0.5} angle={0.2} penumbra={1} position={[0, 15, 10]} />
+        <pointLight position={[35, 35, 0]} intensity={0.4} />
+        <pointLight position={[-35, -35, 0]} intensity={0.4} />
+        <Stars radius={100} depth={50} count={5000} factor={20} saturation={0} fade speed={ 0.5 } />
+        <Suspense fallback={null}>
+          
+          <Sphere />
+          
+        </Suspense>
+        <OrbitControls autoRotate  autoRotateSpeed={ 0.054 } target={[0,0.8,0]} enableZoom={false} minPolarAngle={ 2.1 } maxPolarAngle={1}/>
+      </Canvas>
+      </div>
     </>
   )
 }

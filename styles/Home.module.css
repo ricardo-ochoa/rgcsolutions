@@ -1,10 +1,34 @@
-.main {
+/* .main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
+} */
+
+.worldBg {
+  width: 100vw!important;
+  height: 100vh!important;
+  background-color: black;
+  opacity: 0.5;
+}
+
+.sat{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sat span{
+  font-size: 4rem;
+  position: absolute;
+  z-index: 3;
+  cursor: none;
+}
+
+.signals{
+  z-index: -1;
 }
 
 .description {
@@ -42,8 +66,21 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(25%, auto));
-  width: var(--max-width);
-  max-width: 100%;
+  position: absolute;
+  width: 100%;
+  z-index: 3;
+  padding: 3rem;
+  margin: 0 auto;
+  text-align: left;
+}
+
+
+.card1 {
+  padding: 1rem 1.2rem;
+  border-radius: var(--border-radius);
+  background: rgba(var(--card-rgb), 0);
+  border: 1px solid rgba(var(--card-border-rgb), 0);
+  transition: background 200ms, border 200ms;
 }
 
 .card {
@@ -69,7 +106,7 @@
   opacity: 0.6;
   font-size: 0.9rem;
   line-height: 1.5;
-  max-width: 30ch;
+  /* max-width: 30ch; */
 }
 
 .center {
@@ -77,8 +114,8 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  padding: 4rem 0;
 }
+
 
 .center::before {
   background: var(--secondary-glow);
@@ -182,7 +219,6 @@
   .grid {
     grid-template-columns: 1fr;
     margin-bottom: 120px;
-    max-width: 320px;
     text-align: center;
   }
 
@@ -253,7 +289,7 @@
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
   .grid {
-    grid-template-columns: repeat(2, 50%);
+    grid-template-columns: repeat(2, 100%);
   }
 }
 
